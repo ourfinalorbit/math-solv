@@ -1,0 +1,158 @@
+<html>
+    <head>
+
+        <meta charset="UTF-8">
+        <title>Maths Solver</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" async></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Math&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+
+        <div id="random_decimal">
+        </div>
+
+        <div class="all">
+            <div class="toolbar" id="toolbar"></div>
+            <div class="main">
+                <div class="editor">
+
+                    <!-- user input container-->
+                    <div class="input_container">
+                        <div class="command_box" id="command_box"></div>
+                        <input type="text" class="maininput" onkeyup="send()" onkeydown="keydown()" id="user_inputtext" value="" placeholder="enter your command here...">
+                    </div>
+                    
+                    <!-- new line - symbols - calcuators -->
+                    <div class="add_container">
+                        <div class="add_button" onclick=""><div class="ab_1"> <div class="ab_2">New Line</div></div></div>
+                        <div class="add_button" onclick="showsyms()"><div class="ab_1"> <div class="ab_2">Symbols</div></div></div>
+                        <div class="add_button" onclick=""><div class="ab_1"> <div class="ab_2">Calculators</div></div></div>
+                    </div>
+
+                    <!--symbols -->
+                    <div class="modular_add" id="syms">
+                        <div class="sym_addbutton"></div>
+                        <div class="sym_addbutton"></div>
+                        <div class="sym_addbutton"></div>
+                        <div class="sym_addbutton"></div>
+                        <div class="sym_addbutton"></div>
+                        <div class="sym_addbutton"></div>
+                        <div class="sym_addbutton"></div>
+                        <div class="sym_addbutton"></div>
+                        <div class="sym_addbutton"></div>
+                        <div class="sym_addbutton"></div>
+                        <div class="sym_addbutton"></div>
+                        <div class="sym_addbutton"></div>
+                        <div class="sym_addbutton"></div>
+                    </div>
+
+                </div>
+                <div class="output_outer">
+                    <div class="output_container">
+                        <div class="outputtext" id="output">
+                            waiting for input...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <p>$$ f(x)=f(0)+\left[\frac{f^{\prime}(0)}{1 !}\right] x+\left[\frac{f^{\prime \prime}(0)}{2 !}\right] x^2+\cdots+\left[\frac{f^{(n)}(0)}{n!}\right]x^n $$</p>
+
+
+
+        <script>
+
+            // create new line
+            function newline() {
+
+            }
+
+            // show hide symbol buttons 
+            function showsyms() {
+                if (document.getElementById("syms").style.display == "none") {
+                    document.getElementById("syms").style.display = "flex"
+                } else {
+                    document.getElementById("syms").style.display = "none"
+                }
+                ;
+                // console.log(flaskMessage)
+            }
+
+            function keydown() {
+
+                // get user input 
+                user_inputtext = document.getElementById('user_inputtext').value;
+
+                // delete command box
+                $(document).keydown(function(keyPressed) {
+                    if (keyPressed.keyCode == 8) {
+                        if (user_inputtext == "") {
+                            document.getElementById("command_box").style.display = "none";
+                            document.getElementById("command_box").innerHTML = "";
+                        }
+                    }
+                });
+
+            }
+
+            function send() {
+
+                document.getElementById("output").style.color = "black";
+
+                // get user input 
+                user_inputtext = document.getElementById('user_inputtext').value;
+
+                // check for command 
+                const commands = ["factorise", "roots", "expand", "simplify", "maclaurin", "binomialexp"]
+                if (commands.includes(user_inputtext)) {
+                    console.log("yes");
+                    document.getElementById("command_box").style.display = "flex";
+                    document.getElementById("command_box").innerHTML = user_inputtext;
+                    let replace = user_inputtext.replace(user_inputtext, "");
+                    document.getElementById("user_inputtext").value = replace;
+                }  
+                
+                // check for special characters
+                if (user_inputtext.includes("pi")) {
+                    let replace = user_inputtext.replace("pi", "π");
+                    document.getElementById("user_inputtext").value = replace;
+                    // console.log("π")
+                }
+
+                // send and receive 
+                array_1 = {
+                    command: document.getElementById("command_box").innerHTML,
+                    express: document.getElementById("user_inputtext").value
+                };
+                const request = new XMLHttpRequest();
+                request.open('POST', `/input/${JSON.stringify(array_1)}`)
+                request.onload = () => {
+                    const response = request.responseText
+                    document.getElementById("output").innerHTML = response;
+                }
+                request.send()
+        
+            }
+
+            // output formatting 
+            if (document.getElementById("user_inputtext").value == "") {
+                document.getElementById("output").style.color = "#939393";
+            }
+        
+        </script>
+        
+    </body>
+</html>
+

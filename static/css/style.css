@@ -1,0 +1,206 @@
+:root {
+    --main-color: #f2f2f2;
+    --element-color: #ebebeb;
+    --hover-color: #ebe8e8;
+    --border-radius: 0px;
+    --spacing: 10px;
+}
+
+
+
+body {
+    margin: 0;
+    font-family: 'Noto Sans Math', sans-serif;
+}
+
+.all {
+    padding: var(--spacing);
+    display: flex;
+}
+
+    .toolbar {
+        width: 56px;
+        height: calc(100vh - calc(2 * var(--spacing)));
+        background-color: var(--main-color);
+        margin-right: var(--spacing);
+        border-radius: var(--border-radius);
+    }
+
+    .main {
+        width: calc(100vw - 80px);
+        height: calc(100vh - calc(2 * var(--spacing)));
+        display: flex;
+        /* background-color: blue; */
+    }
+
+        .editor {
+            box-sizing: border-box;
+            width: 100%;
+            background-color: var(--main-color);
+            margin-right: var(--spacing);
+            border-radius: var(--border-radius);
+            padding: 16px;
+        }
+
+            .input_container {
+                box-sizing: border-box;
+                width: 100%;
+                height: 50px;
+                background-color: var(--element-color);
+                border-width: 0px;
+                font-size: 20px;
+                border-radius: var(--border-radius);
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                padding: 8px;
+            }
+
+            .input_container:hover {
+                background-color: var(--hover-color);
+            }
+
+            .input_container:focus {
+                background-color: var(--hover-color);
+            }
+
+                .command_box {
+                    display: none;
+                    box-sizing: border-box;
+                    height: auto;
+                    width: auto;
+                    background-color: #dddddd;
+                    padding-left: 15px;
+                    padding-right: 15px;
+                    font-size: 18px;
+                    font-family: arial;
+                    display: ;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+
+                .maininput {
+                    box-sizing: border-box;
+                    height: inherit;
+                    margin-top: -8px;
+                    font-size: 18px;
+                    background-color: transparent;
+                    border-width: 0px;
+                    flex: 1;
+                    padding-left: 10px;
+                }
+
+                .maininput:hover {
+                    outline: none;
+                }
+
+                .maininput:focus {
+                    outline: none;
+                }
+
+                ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                    color: #939393;
+                    opacity: 1; /* Firefox */
+                }
+                  
+                :-ms-input-placeholder { /* Internet Explorer 10-11 */
+                    color: #939393;
+                }
+                  
+                ::-ms-input-placeholder { /* Microsoft Edge */
+                    color: #939393;
+                }
+
+            .add_container {
+                box-sizing: border-box;
+                width: 100%;
+                height: 50px;
+                display: flex;
+                flex-wrap: nowrap;
+                flex-direction: row;
+                justify-content: space-between;
+                margin-top: 10px;
+            }
+
+
+                .add_button {
+                    box-sizing: border-box;
+                    width: calc(33.33% - 6px);
+                    height: inherit;
+                    background-color: #ebebeb;
+                    border-radius: var(--border-radius);
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                }
+
+                .add_button:hover {
+                    cursor: pointer;
+                }
+
+                    .ab_1 {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        height: inherit;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                        .ab_2 {
+                            font-weight: 400;
+                            font-size: 14px;
+                            position: absolute;
+                        }
+
+            .addinput:hover {
+                background-color: #ebe8e8;
+            }
+
+            .modular_add {
+                box-sizing: border-box;
+                width: calc(100% + 10px);
+                height: auto;
+                margin-bottom: 8px;
+                display: none;
+                flex-direction: row;
+                justify-content: start;
+                flex-wrap: wrap;
+                margin-top: 10px;
+            }
+
+                .sym_addbutton {
+                    width: 45px;
+                    height: 45px;
+                    background-color: var(--element-color);
+                    border-radius: var(--border-radius);
+                    margin-right: 10px;
+                    margin-bottom: 10px;
+                }
+
+
+        .output_outer {
+            box-sizing: border-box;
+            width: 100%;
+            background-color: var(--main-color);
+            border-radius: var(--border-radius);
+            padding: 16px;
+        }
+
+            .output_container {
+                box-sizing: border-box;
+                width: 100%;
+                height: 48px;
+                background-color: var(--element-color);
+                padding-left: 18px;
+                padding-right: 18px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+                .outputtext {
+                    font-size: 18px;
+                    color: black;
+                }
